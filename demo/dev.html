@@ -7,6 +7,18 @@
     <title>Document</title>
 </head>
 <body>
-    <script type=module src=../LeaderLineESM.js></script>
+    
+
+<div id=start>Hello</div>
+<p>
+    Alternative to Polymer's dom-if element that allows comparison between two operands, as well as progressive enhancement. DOM deletion takes place on non matching elements.
+</p>
+<div id=end>Goodbye</div>
+
+<script type=module>
+    import {LeaderLine} from '../LeaderLineESM.js';
+    new LeaderLine(start, end);
+</script>
+<!-- <script type=module src=../LeaderLineESM.js></script> -->
 </body>
 </html>
