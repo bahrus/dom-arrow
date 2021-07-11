@@ -33,7 +33,13 @@ const onNewStartEnd = ({ connect: startSelector, to: endSelector, self }) => {
     const end = rn.querySelector(endSelector);
     self.line = new LeaderLine(start, end);
 };
-const propActions = [onNewStartEnd];
+const configLine = ({ line, color }) => {
+    const options = {
+        color,
+    };
+    line.setOptions(options);
+};
+const propActions = [onNewStartEnd, configLine];
 const baseProp = {
     async: true,
     dry: true,
@@ -41,7 +47,10 @@ const baseProp = {
 const objProp = {
     ...baseProp,
     type: Object,
-    notify: true,
+};
+const pubProp = {
+    ...objProp,
+    type: Object,
 };
 const strProp1 = {
     ...baseProp,
@@ -54,6 +63,7 @@ const reqStrProp = {
 const propDefMap = {
     connect: reqStrProp,
     to: reqStrProp,
+    color: strProp1,
 };
 const slicedPropDefs = xc.getSlicedPropDefs(propDefMap);
 xc.letThereBeProps(DOMArrow, slicedPropDefs, 'onPropChange');

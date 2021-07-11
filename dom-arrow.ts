@@ -1,5 +1,6 @@
 import {xc, IReactor, PropAction, PropDef, PropDefMap, ReactiveSurface} from 'xtal-element/lib/XtalCore.js';
 import {DOMArrowProps} from './types.d.js';
+import {Options} from './leader-line-types.d.js';
 import {LeaderLine} from './LeaderLineESM.js';
 
 export class DOMArrow extends HTMLElement implements ReactiveSurface{
@@ -38,8 +39,14 @@ const onNewStartEnd = ({connect: startSelector, to: endSelector, self}: DOMArrow
     self.line = new LeaderLine(start, end);
 }
 
+const configLine = ({line, color}: DOMArrow) => {
+    const options: Options = {
+        color,
+    };
+    line.setOptions(options);
+}
 
-const propActions = [onNewStartEnd] as PropAction[];
+const propActions = [onNewStartEnd, configLine] as PropAction[];
 
 const baseProp: PropDef = {
     async: true,
@@ -49,8 +56,13 @@ const baseProp: PropDef = {
 const objProp: PropDef = {
     ...baseProp,
     type: Object,
-    notify: true,
+};
+
+const pubProp: PropDef = {
+    ...objProp,
+    type: Object,
 }
+
 
 const strProp1 : PropDef = {
     ...baseProp,
@@ -66,6 +78,7 @@ const reqStrProp: PropDef = {
 const propDefMap: PropDefMap<DOMArrow> = {
     connect: reqStrProp,
     to: reqStrProp,
+    color: strProp1,
 };
 const slicedPropDefs = xc.getSlicedPropDefs(propDefMap);
 xc.letThereBeProps(DOMArrow, slicedPropDefs, 'onPropChange');
