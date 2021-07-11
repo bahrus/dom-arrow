@@ -4,7 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "node node_modules/xtal-test/serve.js"
+  },
+  "dependencies": {
+    "leader-line": "1.0.5"
+  },
+  "devDependencies": {
+    "xtal-test": "0.0.51"
   },
   "repository": {
     "type": "git",
