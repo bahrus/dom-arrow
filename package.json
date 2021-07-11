@@ -2,7 +2,29 @@
   "name": "dom-arrow",
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dom-arrow.js",
+  "module": "dom-arrow.js",
+  "exports": {
+    ".": "./dom-arrow.js",
+    "./dom-arrow.js": "./dom-arrow.js",
+    "./LeaderLineESM.js": "./LeaderLineESM.js"
+  },
+  "files": [
+    "dom*.*",
+    "leader-line-types.d.ts",
+    "LeaderLineESM.js",
+    "types.d.ts"
+  ],
+  "keywords": [
+    "web_components",
+    "web_component",
+    "custom-elements",
+    "custom-element",
+    "arrow",
+    "connector",
+    "leader-line"
+  ],
+  "types": "./types.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "node node_modules/xtal-test/serve.js",
