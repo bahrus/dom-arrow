@@ -13,7 +13,9 @@
   },
   "devDependencies": {
     "xtal-test": "0.0.51",
-    "leader-line-types": "1.0.5-2"
+    "leader-line-types": "1.0.5-2",
+    "@skypack/package-check": "0.2.2",
+    "@custom-elements-manifest/analyzer": "0.4.12"
   },
   "repository": {
     "type": "git",
