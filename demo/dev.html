@@ -15,10 +15,22 @@
 </p>
 <div id=end>Goodbye</div>
 
-<script type=module>
+<!-- <script type=module>
     import {LeaderLine} from '../LeaderLineESM.js';
     new LeaderLine(start, end);
-</script>
+</script> -->
 <!-- <script type=module src=../LeaderLineESM.js></script> -->
+<dom-arrow connect=#start to=#end></dom-arrow>
+<script type=importmap>
+    {
+        "imports": {
+            "xtal-element/": "../node_modules/xtal-element/",
+            "trans-render/": "../node_modules/trans-render/"
+        }
+    }
+</script>
+<script type=module>
+    import '../dom-arrow.js';
+</script>
 </body>
 </html>
