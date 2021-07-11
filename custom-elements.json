@@ -1,0 +1,775 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "dom-arrow.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "DOMArrow",
+          "members": [
+            {
+              "kind": "method",
+              "name": "onPropChange",
+              "parameters": [
+                {
+                  "name": "n"
+                },
+                {
+                  "name": "prop"
+                },
+                {
+                  "name": "nv"
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "self",
+              "privacy": "private",
+              "default": "this"
+            },
+            {
+              "kind": "field",
+              "name": "propActions",
+              "privacy": "private",
+              "default": "[onNewStartEnd, configLine]",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "reactor",
+              "privacy": "private",
+              "default": "new xc.Rx(this)"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DOMArrow",
+          "declaration": {
+            "name": "DOMArrow",
+            "module": "dom-arrow.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dom-arrow.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "DOMArrow",
+          "members": [
+            {
+              "kind": "field",
+              "name": "is",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "default": "'dom-arrow'"
+            },
+            {
+              "kind": "field",
+              "name": "self",
+              "default": "this",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "propActions",
+              "default": "[onNewStartEnd, configLine]",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "reactor",
+              "type": {
+                "text": "IReactor"
+              },
+              "default": "new xc.Rx(this)",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "onPropChange",
+              "parameters": [
+                {
+                  "name": "n",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "prop",
+                  "type": {
+                    "text": "PropDef"
+                  }
+                },
+                {
+                  "name": "nv",
+                  "type": {
+                    "text": "any"
+                  }
+                }
+              ]
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DOMArrow",
+          "declaration": {
+            "name": "DOMArrow",
+            "module": "dom-arrow.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "leader-line-types.d.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LabelAttachment"
+        },
+        {
+          "kind": "class",
+          "description": "",
+          "name": "AnchorAttachment"
+        },
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LeaderLine",
+          "members": [
+            {
+              "kind": "field",
+              "name": "end",
+              "type": {
+                "text": "Element | AnchorAttachment"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "start",
+              "type": {
+                "text": "Element | AnchorAttachment"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "color",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "startSocketGravity",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "endSocketGravity",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "startPlugColor",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "endPlugColor",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "startPlugSize",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "endPlugSize",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "outline",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "outlineColor",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "outlineSize",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "startPlugOutline",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "endPlugOutline",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "startPlugOutlineColor",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "endPlugOutlineColor",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "startPlugOutlineSize",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "endPlugOutlineSize",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "path",
+              "type": {
+                "text": "PathType"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "startSocket",
+              "type": {
+                "text": "SocketType"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "endSocket",
+              "type": {
+                "text": "SocketType"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "startPlug",
+              "type": {
+                "text": "PlugType"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "endPlug",
+              "type": {
+                "text": "PlugType"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "dash",
+              "type": {
+                "text": "boolean | DashOptions"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "gradient",
+              "type": {
+                "text": "boolean | GradientOptions"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "dropShadow",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "startLabel",
+              "type": {
+                "text": "string | LabelAttachment"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "endLabel",
+              "type": {
+                "text": "string | LabelAttachment"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "middleLabel",
+              "type": {
+                "text": "string | LabelAttachment"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "pointAnchor",
+              "static": true,
+              "return": {
+                "type": {
+                  "text": "AnchorAttachment"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "PointAnchorOptions"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "pointAnchor",
+              "static": true,
+              "return": {
+                "type": {
+                  "text": "AnchorAttachment"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "element",
+                  "type": {
+                    "text": "Element"
+                  }
+                },
+                {
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "text": "PointAnchorOptions"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "areaAnchor",
+              "static": true,
+              "return": {
+                "type": {
+                  "text": "AnchorAttachment"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "AreaAnchorOptions"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "areaAnchor",
+              "static": true,
+              "return": {
+                "type": {
+                  "text": "AnchorAttachment"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "element",
+                  "type": {
+                    "text": "Element"
+                  }
+                },
+                {
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "text": "AreaAnchorOptions"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "areaAnchor",
+              "static": true,
+              "return": {
+                "type": {
+                  "text": "AnchorAttachment"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "element",
+                  "type": {
+                    "text": "Element"
+                  }
+                },
+                {
+                  "name": "shape",
+                  "optional": true,
+                  "type": {
+                    "text": "AreaAnchorShape"
+                  }
+                },
+                {
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "text": "AreaAnchorOptions"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "mouseHoverAnchor",
+              "static": true,
+              "return": {
+                "type": {
+                  "text": "AnchorAttachment"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "MouseHoverAnchorOptions"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "mouseHoverAnchor",
+              "static": true,
+              "return": {
+                "type": {
+                  "text": "AnchorAttachment"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "element",
+                  "type": {
+                    "text": "Element"
+                  }
+                },
+                {
+                  "name": "showEffectName",
+                  "optional": true,
+                  "type": {
+                    "text": "ShowEffectName"
+                  }
+                },
+                {
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "text": "MouseHoverAnchorOptions"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "captionLabel",
+              "static": true,
+              "return": {
+                "type": {
+                  "text": "LabelAttachment"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "any"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "captionLabel",
+              "static": true,
+              "return": {
+                "type": {
+                  "text": "LabelAttachment"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "text",
+                  "optional": true,
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "text": "any"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "pathLabel",
+              "static": true,
+              "return": {
+                "type": {
+                  "text": "LabelAttachment"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "PathLabelOptions"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "pathLabel",
+              "static": true,
+              "return": {
+                "type": {
+                  "text": "LabelAttachment"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "text",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "text": "PathLabelOptions"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "hide",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "showEffectName",
+                  "optional": true,
+                  "type": {
+                    "text": "ShowEffectName"
+                  }
+                },
+                {
+                  "name": "animOptions",
+                  "optional": true,
+                  "type": {
+                    "text": "AnimationOptions"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "showEffectName",
+                  "optional": true,
+                  "type": {
+                    "text": "ShowEffectName"
+                  }
+                },
+                {
+                  "name": "animOptions",
+                  "optional": true,
+                  "type": {
+                    "text": "AnimationOptions"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "remove",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "position",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setOptions",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "Options"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LabelAttachment",
+          "declaration": {
+            "name": "LabelAttachment",
+            "module": "leader-line-types.d.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "AnchorAttachment",
+          "declaration": {
+            "name": "AnchorAttachment",
+            "module": "leader-line-types.d.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LeaderLine",
+          "declaration": {
+            "name": "LeaderLine",
+            "module": "leader-line-types.d.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "LeaderLineESM.js",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "LeaderLine"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LeaderLine",
+          "declaration": {
+            "name": "LeaderLine",
+            "module": "LeaderLineESM.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "types.d.ts",
+      "declarations": [],
+      "exports": []
+    }
+  ]
+}

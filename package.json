@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "node node_modules/xtal-test/serve.js"
+    "serve": "node node_modules/xtal-test/serve.js",
+    "package-check": "package-check",
+    "doc": "custom-elements-manifest analyze"
   },
   "dependencies": {
     "leader-line": "1.0.5",
@@ -21,10 +23,11 @@
     "type": "git",
     "url": "git+https://github.com/bahrus/dom-arrow.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "anderson.bruce.b@gmail.com",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/bahrus/dom-arrow/issues"
   },
-  "homepage": "https://github.com/bahrus/dom-arrow#readme"
+  "homepage": "https://github.com/bahrus/dom-arrow#readme",
+  "customElements": "custom-elements.json"
 }
