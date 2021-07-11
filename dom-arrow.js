@@ -31,12 +31,17 @@ const onNewStartEnd = ({ connect: startSelector, to: endSelector, self }) => {
         rn = rn.host;
     const start = rn.querySelector(startSelector);
     const end = rn.querySelector(endSelector);
-    self.myLine = new LeaderLine(start, end);
+    self.line = new LeaderLine(start, end);
 };
 const propActions = [onNewStartEnd];
 const baseProp = {
     async: true,
     dry: true,
+};
+const objProp = {
+    ...baseProp,
+    type: Object,
+    notify: true,
 };
 const strProp1 = {
     ...baseProp,
@@ -44,7 +49,7 @@ const strProp1 = {
 };
 const reqStrProp = {
     ...strProp1,
-    stopReactionsIfFalsy: true
+    stopReactionsIfFalsy: true,
 };
 const propDefMap = {
     connect: reqStrProp,

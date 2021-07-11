@@ -18,7 +18,7 @@ export class DOMArrow extends HTMLElement implements ReactiveSurface{
      */
     reactor: IReactor = new xc.Rx(this);
 
-    myLine: any;
+
 
     connectedCallback(){
         this.style.display = 'none';
@@ -35,15 +35,22 @@ const onNewStartEnd = ({connect: startSelector, to: endSelector, self}: DOMArrow
     if((<any>rn).host !== undefined) rn = (<any>rn).host;
     const start = rn.querySelector(startSelector);
     const end = rn.querySelector(endSelector);
-    self.myLine = new LeaderLine(start, end);
-
+    self.line = new LeaderLine(start, end);
 }
+
+
 const propActions = [onNewStartEnd] as PropAction[];
 
 const baseProp: PropDef = {
     async: true,
     dry: true,
 };
+
+const objProp: PropDef = {
+    ...baseProp,
+    type: Object,
+    notify: true,
+}
 
 const strProp1 : PropDef = {
     ...baseProp,
@@ -52,7 +59,8 @@ const strProp1 : PropDef = {
 
 const reqStrProp: PropDef = {
     ...strProp1,
-    stopReactionsIfFalsy: true
+    stopReactionsIfFalsy: true,
+    
 };
 
 const propDefMap: PropDefMap<DOMArrow> = {

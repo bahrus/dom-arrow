@@ -12,7 +12,8 @@
     "xtal-element": "0.0.414"
   },
   "devDependencies": {
-    "xtal-test": "0.0.51"
+    "xtal-test": "0.0.51",
+    "leader-line-types": "1.0.5-2"
   },
   "repository": {
     "type": "git",
