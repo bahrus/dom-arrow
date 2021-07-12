@@ -166,3 +166,9 @@ const propDefMap: PropDefMap<DOMArrow> = {
 const slicedPropDefs = xc.getSlicedPropDefs(propDefMap);
 xc.letThereBeProps(DOMArrow, slicedPropDefs, 'onPropChange');
 xc.define(DOMArrow);
+
+declare global {
+    interface HTMLElementTagNameMap {
+        'dom-arrow': DOMArrow;
+    }
+}
