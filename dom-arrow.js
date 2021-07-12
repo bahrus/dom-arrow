@@ -22,12 +22,24 @@ export class DOMArrow extends HTMLElement {
         this.reactor.addToQueue(prop, nv);
     }
 }
-const onNewStartEnd = ({ connect: startSelector, to: endSelector, self }) => {
+const onNewStartEnd = ({ connect: startSelector, to: endSelector, connectAreaAttachment, toAreaAttachment, connectPointAttachment, toPointAttachment, self }) => {
     let rn = self.getRootNode();
     if (rn.host !== undefined)
         rn = rn.host;
-    const start = rn.querySelector(startSelector);
-    const end = rn.querySelector(endSelector);
+    let start = rn.querySelector(startSelector);
+    if (connectAreaAttachment !== undefined) {
+        start = LeaderLine.areaAnchor(start, toAreaAttachment);
+    }
+    else if (connectPointAttachment) {
+        start = LeaderLine.pointAnchor(start, toPointAttachment);
+    }
+    let end = rn.querySelector(endSelector);
+    if (toAreaAttachment !== undefined) {
+        end = LeaderLine.areaAnchor(start, toAreaAttachment);
+    }
+    else if (toPointAttachment) {
+        end = LeaderLine.pointAnchor(start, toPointAttachment);
+    }
     self.line = new LeaderLine(start, end);
 };
 const configLine = ({ line, color, dash, dropShadow, endLabel, endPlug, endPlugColor, endPlugOutline, endPlugOutlineColor, endPlugOutlineSize, endPlugSize, endSocket, endSocketGravity, gradient, hide, middleLabel, outline, outlineColor, outlineSize, path, show, size, startLabel, startPlug, startPlugColor, startPlugOutlineSize, startPlugSize, startSocket, startPlugOutline, startPlugOutlineColor, startSocketGravity }) => {
@@ -100,6 +112,10 @@ const reqStrProp = {
 };
 const propDefMap = {
     connect: reqStrProp,
+    connectAreaAttachment: parsedObjProp,
+    toAreaAttachment: parsedObjProp,
+    connectPointAttachment: parsedObjProp,
+    toPointAttachment: parsedObjProp,
     to: reqStrProp,
     color: strProp1,
     size: numProp1,

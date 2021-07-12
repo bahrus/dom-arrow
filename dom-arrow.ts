@@ -31,11 +31,22 @@ export class DOMArrow extends HTMLElement implements ReactiveSurface{
 }
 export interface DOMArrow extends DOMArrowProps{}
 
-const onNewStartEnd = ({connect: startSelector, to: endSelector, self}: DOMArrow) => {
+const onNewStartEnd = ({connect: startSelector, to: endSelector, connectAreaAttachment, toAreaAttachment, connectPointAttachment, toPointAttachment, self}: DOMArrow) => {
     let rn = self.getRootNode() as DocumentFragment;
     if((<any>rn).host !== undefined) rn = (<any>rn).host;
-    const start = rn.querySelector(startSelector);
-    const end = rn.querySelector(endSelector);
+    let start = rn.querySelector(startSelector);
+    if(connectAreaAttachment !== undefined){
+        start = LeaderLine.areaAnchor(start, toAreaAttachment);
+    }else if(connectPointAttachment){
+        start = LeaderLine.pointAnchor(start, toPointAttachment);
+    }
+    let end = rn.querySelector(endSelector);
+    if(toAreaAttachment !== undefined){
+        end = LeaderLine.areaAnchor(start, toAreaAttachment);
+    }else if(toPointAttachment){
+        end = LeaderLine.pointAnchor(start, toPointAttachment);
+    }
+
     self.line = new LeaderLine(start, end);
 }
 
@@ -125,6 +136,10 @@ const reqStrProp: PropDef = {
 
 const propDefMap: PropDefMap<DOMArrow> = {
     connect: reqStrProp,
+    connectAreaAttachment: parsedObjProp,
+    toAreaAttachment: parsedObjProp,
+    connectPointAttachment: parsedObjProp,
+    toPointAttachment: parsedObjProp,
     to: reqStrProp,
     color: strProp1,
     size: numProp1,
