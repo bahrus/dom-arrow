@@ -39,9 +39,42 @@ const onNewStartEnd = ({connect: startSelector, to: endSelector, self}: DOMArrow
     self.line = new LeaderLine(start, end);
 }
 
-const configLine = ({line, color}: DOMArrow) => {
+const configLine = ({
+        line, color, dash, dropShadow, endLabel,endPlug, endPlugColor,endPlugOutline,endPlugOutlineColor,endPlugOutlineSize,endPlugSize,
+        endSocket, endSocketGravity, gradient, hide, middleLabel, outline, outlineColor, outlineSize, path, show, size,startLabel,
+        startPlug,startPlugColor,startPlugOutlineSize,startPlugSize,startSocket,startPlugOutline,startPlugOutlineColor,startSocketGravity
+    }: DOMArrow) => {
     const options: Options = {
         color,
+        dash,
+        dropShadow,
+        endLabel,
+        endPlug,
+        endPlugColor,
+        endPlugOutline,
+        endPlugOutlineColor,
+        endPlugOutlineSize,
+        endPlugSize,
+        endSocket,
+        endSocketGravity,
+        gradient,
+        hide,
+        middleLabel,
+        outline,
+        outlineColor,
+        outlineSize,
+        path,
+        show,
+        size,
+        startLabel,
+        startPlug,
+        startPlugColor,
+        startPlugOutlineSize,
+        startPlugSize,
+        startSocket,
+        startPlugOutline,
+        startPlugOutlineColor,
+        startSocketGravity
     };
     line.setOptions(options);
 }

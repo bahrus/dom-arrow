@@ -1,21 +1,19 @@
 import { xc } from 'xtal-element/lib/XtalCore.js';
 import { LeaderLine } from './LeaderLineESM.js';
 export class DOMArrow extends HTMLElement {
-    constructor() {
-        super(...arguments);
-        /**
-         * @private
-         */
-        this.self = this;
-        /**
-         * @private
-         */
-        this.propActions = propActions;
-        /**
-         * @private
-         */
-        this.reactor = new xc.Rx(this);
-    }
+    static is = 'dom-arrow';
+    /**
+     * @private
+     */
+    self = this;
+    /**
+     * @private
+     */
+    propActions = propActions;
+    /**
+     * @private
+     */
+    reactor = new xc.Rx(this);
     connectedCallback() {
         this.style.display = 'none';
         xc.mergeProps(this, slicedPropDefs);
@@ -24,7 +22,6 @@ export class DOMArrow extends HTMLElement {
         this.reactor.addToQueue(prop, nv);
     }
 }
-DOMArrow.is = 'dom-arrow';
 const onNewStartEnd = ({ connect: startSelector, to: endSelector, self }) => {
     let rn = self.getRootNode();
     if (rn.host !== undefined)
@@ -33,9 +30,38 @@ const onNewStartEnd = ({ connect: startSelector, to: endSelector, self }) => {
     const end = rn.querySelector(endSelector);
     self.line = new LeaderLine(start, end);
 };
-const configLine = ({ line, color }) => {
+const configLine = ({ line, color, dash, dropShadow, endLabel, endPlug, endPlugColor, endPlugOutline, endPlugOutlineColor, endPlugOutlineSize, endPlugSize, endSocket, endSocketGravity, gradient, hide, middleLabel, outline, outlineColor, outlineSize, path, show, size, startLabel, startPlug, startPlugColor, startPlugOutlineSize, startPlugSize, startSocket, startPlugOutline, startPlugOutlineColor, startSocketGravity }) => {
     const options = {
         color,
+        dash,
+        dropShadow,
+        endLabel,
+        endPlug,
+        endPlugColor,
+        endPlugOutline,
+        endPlugOutlineColor,
+        endPlugOutlineSize,
+        endPlugSize,
+        endSocket,
+        endSocketGravity,
+        gradient,
+        hide,
+        middleLabel,
+        outline,
+        outlineColor,
+        outlineSize,
+        path,
+        show,
+        size,
+        startLabel,
+        startPlug,
+        startPlugColor,
+        startPlugOutlineSize,
+        startPlugSize,
+        startSocket,
+        startPlugOutline,
+        startPlugOutlineColor,
+        startSocketGravity
     };
     line.setOptions(options);
 };
