@@ -1,7 +1,7 @@
 import {xc, IReactor, PropAction, PropDef, PropDefMap, ReactiveSurface} from 'xtal-element/lib/XtalCore.js';
 import {DOMArrowProps} from './types.d.js';
 import {Options} from './leader-line-types.d.js';
-import {LeaderLine} from './LeaderLineESM.js';
+import {LeaderLine} from './leader-line.js';
 
 export class DOMArrow extends HTMLElement implements ReactiveSurface{
     static is = 'dom-arrow';
@@ -24,6 +24,7 @@ export class DOMArrow extends HTMLElement implements ReactiveSurface{
     connectedCallback(){
         this.style.display = 'none';
         xc.mergeProps(this, slicedPropDefs);
+        this.isC = true;
     }
     onPropChange(n: string, prop: PropDef, nv: any){
         this.reactor.addToQueue(prop, nv);
@@ -31,16 +32,16 @@ export class DOMArrow extends HTMLElement implements ReactiveSurface{
 }
 export interface DOMArrow extends DOMArrowProps{}
 
-const onNewStartEnd = ({connect: startSelector, to: endSelector, connectAreaAttachment, toAreaAttachment, connectPointAttachment, toPointAttachment, self}: DOMArrow) => {
+const onNewStartEnd = ({isC, connect, to, connectAreaAttachment, toAreaAttachment, connectPointAttachment, toPointAttachment, self}: DOMArrow) => {
     let rn = self.getRootNode() as DocumentFragment;
-    if((<any>rn).host !== undefined) rn = (<any>rn).host;
-    let start = rn.querySelector(startSelector);
+    //if((<any>rn).host !== undefined) rn = (<any>rn).host;
+    let start = rn.querySelector(connect);
     if(connectAreaAttachment !== undefined){
         start = LeaderLine.areaAnchor(start, toAreaAttachment);
     }else if(connectPointAttachment){
         start = LeaderLine.pointAnchor(start, toPointAttachment);
     }
-    let end = rn.querySelector(endSelector);
+    let end = rn.querySelector(to);
     if(toAreaAttachment !== undefined){
         end = LeaderLine.areaAnchor(start, toAreaAttachment);
     }else if(toPointAttachment){
@@ -100,12 +101,22 @@ const baseProp: PropDef = {
 const boolProp: PropDef = {
     ...baseProp,
     type: Boolean,
+};
+
+const nnBool: PropDef = {
+    ...boolProp,
+    stopReactionsIfFalsy: true,
 }
 
 const objProp: PropDef = {
     ...baseProp,
     type: Object,
 };
+
+const nnObj: PropDef = {
+    ...objProp,
+    stopReactionsIfFalsy: true,
+}
 
 const parsedObjProp: PropDef = {
     ...objProp,
@@ -136,6 +147,8 @@ const reqStrProp: PropDef = {
 
 const propDefMap: PropDefMap<DOMArrow> = {
     connect: reqStrProp,
+    isC: nnBool,
+    line: nnObj,
     connectAreaAttachment: parsedObjProp,
     toAreaAttachment: parsedObjProp,
     connectPointAttachment: parsedObjProp,

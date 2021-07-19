@@ -11,6 +11,7 @@ export interface DOMArrowProps extends HTMLElement, Options{
      * @private
      */
     line: LeaderLine;
+    isC: boolean;
 }
 
 export interface AreaAttachmentOptions extends PointAttachmentOptions{

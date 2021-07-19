@@ -1,5 +1,5 @@
 import { xc } from 'xtal-element/lib/XtalCore.js';
-import { LeaderLine } from './LeaderLineESM.js';
+import { LeaderLine } from './leader-line.js';
 export class DOMArrow extends HTMLElement {
     static is = 'dom-arrow';
     /**
@@ -17,23 +17,23 @@ export class DOMArrow extends HTMLElement {
     connectedCallback() {
         this.style.display = 'none';
         xc.mergeProps(this, slicedPropDefs);
+        this.isC = true;
     }
     onPropChange(n, prop, nv) {
         this.reactor.addToQueue(prop, nv);
     }
 }
-const onNewStartEnd = ({ connect: startSelector, to: endSelector, connectAreaAttachment, toAreaAttachment, connectPointAttachment, toPointAttachment, self }) => {
+const onNewStartEnd = ({ isC, connect, to, connectAreaAttachment, toAreaAttachment, connectPointAttachment, toPointAttachment, self }) => {
     let rn = self.getRootNode();
-    if (rn.host !== undefined)
-        rn = rn.host;
-    let start = rn.querySelector(startSelector);
+    //if((<any>rn).host !== undefined) rn = (<any>rn).host;
+    let start = rn.querySelector(connect);
     if (connectAreaAttachment !== undefined) {
         start = LeaderLine.areaAnchor(start, toAreaAttachment);
     }
     else if (connectPointAttachment) {
         start = LeaderLine.pointAnchor(start, toPointAttachment);
     }
-    let end = rn.querySelector(endSelector);
+    let end = rn.querySelector(to);
     if (toAreaAttachment !== undefined) {
         end = LeaderLine.areaAnchor(start, toAreaAttachment);
     }
@@ -86,9 +86,17 @@ const boolProp = {
     ...baseProp,
     type: Boolean,
 };
+const nnBool = {
+    ...boolProp,
+    stopReactionsIfFalsy: true,
+};
 const objProp = {
     ...baseProp,
     type: Object,
+};
+const nnObj = {
+    ...objProp,
+    stopReactionsIfFalsy: true,
 };
 const parsedObjProp = {
     ...objProp,
@@ -112,6 +120,8 @@ const reqStrProp = {
 };
 const propDefMap = {
     connect: reqStrProp,
+    isC: nnBool,
+    line: nnObj,
     connectAreaAttachment: parsedObjProp,
     toAreaAttachment: parsedObjProp,
     connectPointAttachment: parsedObjProp,

@@ -7,18 +7,21 @@
     <title>Document</title>
 </head>
 <body>
+
+<div>
+<template shadowroot=open>
+    <div id=start>Hello</div>
+    <p>
+        Euclid [described](https://en.wikipedia.org/wiki/Line_(geometry)) a line as "breathless length" which "lies equally with respect to the points on itself"; 
+        he introduced several postulates as basic unprovable properties from which he constructed all of geometry, 
+        which is now called Euclidean geometry to avoid confusion with other geometries which 
+        have been introduced since the end of the 19th century (such as non-Euclidean, projective and affine geometry).
+    </p>
+    <div id=end>Goodbye</div>
     
-
-<div id=start>Hello</div>
-<p>
-    Euclid [described](https://en.wikipedia.org/wiki/Line_(geometry)) a line as "breathless length" which "lies equally with respect to the points on itself"; 
-    he introduced several postulates as basic unprovable properties from which he constructed all of geometry, 
-    which is now called Euclidean geometry to avoid confusion with other geometries which 
-    have been introduced since the end of the 19th century (such as non-Euclidean, projective and affine geometry).
-</p>
-<div id=end>Goodbye</div>
-
-<dom-arrow connect=#start to=#end color=green></dom-arrow>
+    <dom-arrow connect=#start to=#end color=green></dom-arrow>
+</template>
+</div>
 <script type=importmap>
     {
         "imports": {
