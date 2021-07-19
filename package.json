@@ -12,7 +12,7 @@
   "files": [
     "dom*.*",
     "leader-line-types.d.ts",
-    "LeaderLineESM.js",
+    "leader-line.js",
     "types.d.ts"
   ],
   "keywords": [
