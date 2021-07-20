@@ -1,5 +1,9 @@
 import { xc } from 'xtal-element/lib/XtalCore.js';
 import { LeaderLine } from './leader-line.js';
+/**
+ * @tag dom-arrow
+ * @element dom-arrow
+ */
 export class DOMArrow extends HTMLElement {
     static is = 'dom-arrow';
     /**

@@ -7,7 +7,7 @@
   "exports": {
     ".": "./dom-arrow.js",
     "./dom-arrow.js": "./dom-arrow.js",
-    "./LeaderLineESM.js": "./LeaderLineESM.js"
+    "./leader-line.js": "./leader-line.js"
   },
   "files": [
     "dom*.*",

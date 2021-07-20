@@ -3,6 +3,10 @@ import {DOMArrowProps} from './types.d.js';
 import {Options} from './leader-line-types.d.js';
 import {LeaderLine} from './leader-line.js';
 
+/**
+ * @tag dom-arrow
+ * @element dom-arrow
+ */
 export class DOMArrow extends HTMLElement implements ReactiveSurface{
     static is = 'dom-arrow';
 
