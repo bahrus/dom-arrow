@@ -55,6 +55,7 @@ ce.def({
         actions: {
             doConnect: {
                 ifAllOf: ['isC', 'connect', 'to'],
+                actIfKeyIn: ['connectAreaAttachment', 'connectPointAttachment', 'toAreaAttachment', 'toPointAttachment', 'loadDelay']
             },
             doConfig: {
                 ifAllOf: ['line'],
