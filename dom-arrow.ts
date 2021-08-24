@@ -38,7 +38,6 @@ export interface DOMArrow extends DOMArrowProps{}
 
 const onNewStartEnd = ({isC, connect, to, connectAreaAttachment, toAreaAttachment, connectPointAttachment, toPointAttachment, self}: DOMArrow) => {
     let rn = self.getRootNode() as DocumentFragment;
-    //if((<any>rn).host !== undefined) rn = (<any>rn).host;
     let start = rn.querySelector(connect);
     if(connectAreaAttachment !== undefined){
         start = LeaderLine.areaAnchor(start, toAreaAttachment);
@@ -199,8 +198,3 @@ const slicedPropDefs = xc.getSlicedPropDefs(propDefMap);
 xc.letThereBeProps(DOMArrow, slicedPropDefs, 'onPropChange');
 xc.define(DOMArrow);
 
-declare global {
-    interface HTMLElementTagNameMap {
-        'dom-arrow': DOMArrow;
-    }
-}

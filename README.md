@@ -7,7 +7,7 @@
 
 dom-arrow is a web component wrapper around the [leader-line npm package](https://www.npmjs.com/package/leader-line).
 
-The name / idea of this web component was inspired by [this library](https://www.cssscript.com/connect-elements-directional-arrow/) which helpfully [links](https://www.cssscript.com/draw-svg-paths-two-elements-leader-line/) to a [rather powerful library](https://www.npmjs.com/package/leader-line).
+The name / idea of this web component was inspired by [this library](https://www.cssscript.com/connect-elements-directional-arrow/) which helpfully [links](https://www.cssscript.com/draw-svg-paths-two-elements-leader-line/) to a [rather powerful library called leader-line](https://www.npmjs.com/package/leader-line).
 
 ## Sample syntax
 
@@ -20,6 +20,8 @@ The name / idea of this web component was inspired by [this library](https://www
     have been introduced since the end of the 19th century (such as non-Euclidean, projective and affine geometry).
 </p>
 <div id=end>Goodbye</div>
+
+<dom-arrow connect=#start to=#end color=green></dom-arrow>
 ```
 
 ## Demo
