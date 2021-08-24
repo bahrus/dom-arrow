@@ -1,200 +1,79 @@
-import {xc, IReactor, PropAction, PropDef, PropDefMap, ReactiveSurface} from 'xtal-element/lib/XtalCore.js';
-import {DOMArrowProps} from './types.d.js';
-import {Options} from './leader-line-types.d.js';
-import {LeaderLine} from './leader-line.js';
+import {CE} from 'trans-render/lib/CE.js';
+import {DOMArrowProps, DOMArrowActions} from './types.js';
+import { LeaderLine} from './leader-line.js';
+import { Options, LeaderLine as LeaderLineType } from './leader-line-types.js';
 
-/**
- * @tag dom-arrow
- * @element dom-arrow
- */
-export class DOMArrow extends HTMLElement implements ReactiveSurface{
-    static is = 'dom-arrow';
-
-    /**
-     * @private
-     */
-    self = this;
-    /**
-     * @private
-     */
-    propActions = propActions;
-    /**
-     * @private
-     */
-    reactor: IReactor = new xc.Rx(this);
-
-
-
-    connectedCallback(){
-        this.style.display = 'none';
-        xc.mergeProps(this, slicedPropDefs);
-        this.isC = true;
-    }
-    onPropChange(n: string, prop: PropDef, nv: any){
-        this.reactor.addToQueue(prop, nv);
-    }
-}
-export interface DOMArrow extends DOMArrowProps{}
-
-const onNewStartEnd = ({isC, connect, to, connectAreaAttachment, toAreaAttachment, connectPointAttachment, toPointAttachment, self}: DOMArrow) => {
-    let rn = self.getRootNode() as DocumentFragment;
-    let start = rn.querySelector(connect);
-    if(connectAreaAttachment !== undefined){
-        start = LeaderLine.areaAnchor(start, toAreaAttachment);
-    }else if(connectPointAttachment){
-        start = LeaderLine.pointAnchor(start, toPointAttachment);
-    }
-    let end = rn.querySelector(to);
-    if(toAreaAttachment !== undefined){
-        end = LeaderLine.areaAnchor(start, toAreaAttachment);
-    }else if(toPointAttachment){
-        end = LeaderLine.pointAnchor(start, toPointAttachment);
-    }
-
-    self.line = new LeaderLine(start, end);
-}
-
-const configLine = ({
-        line, color, dash, dropShadow, endLabel,endPlug, endPlugColor,endPlugOutline,endPlugOutlineColor,endPlugOutlineSize,endPlugSize,
-        endSocket, endSocketGravity, gradient, hide, middleLabel, outline, outlineColor, outlineSize, path, show, size,startLabel,
-        startPlug,startPlugColor,startPlugOutlineSize,startPlugSize,startSocket,startPlugOutline,startPlugOutlineColor,startSocketGravity
-    }: DOMArrow) => {
-    const options: Options = {
-        color,
-        dash,
-        dropShadow,
-        endLabel,
-        endPlug,
-        endPlugColor,
-        endPlugOutline,
-        endPlugOutlineColor,
-        endPlugOutlineSize,
-        endPlugSize,
-        endSocket,
-        endSocketGravity,
-        gradient,
-        hide,
-        middleLabel,
-        outline,
-        outlineColor,
-        outlineSize,
-        path,
-        show,
-        size,
-        startLabel,
-        startPlug,
-        startPlugColor,
-        startPlugOutlineSize,
-        startPlugSize,
-        startSocket,
-        startPlugOutline,
-        startPlugOutlineColor,
-        startSocketGravity
-    };
-    line.setOptions(options);
-}
-
-const propActions = [onNewStartEnd, configLine] as PropAction[];
-
-const baseProp: PropDef = {
-    async: true,
-    dry: true,
-};
-
-const boolProp: PropDef = {
-    ...baseProp,
-    type: Boolean,
-};
-
-const nnBool: PropDef = {
-    ...boolProp,
-    stopReactionsIfFalsy: true,
-}
-
-const objProp: PropDef = {
-    ...baseProp,
-    type: Object,
-};
-
-const nnObj: PropDef = {
-    ...objProp,
-    stopReactionsIfFalsy: true,
-}
-
-const parsedObjProp: PropDef = {
-    ...objProp,
-    parse: true,
-}
-
-const pubProp: PropDef = {
-    ...objProp,
-    type: Object,
-}
-
-
-const strProp1 : PropDef = {
-    ...baseProp,
-    type: String
-};
-
-const numProp1: PropDef = {
-    ...baseProp,
-    type: Number,
-}
-
-const reqStrProp: PropDef = {
-    ...strProp1,
-    stopReactionsIfFalsy: true,
+export class DOMArrowCore extends HTMLElement implements DOMArrowActions{
+    doConnect(self: this){
+        const {
+            connect, 
+            to,
+            connectAreaAttachment, 
+            connectPointAttachment, 
+            toAreaAttachment, 
+            toPointAttachment
+        } = self;
+        let rn = self.getRootNode() as DocumentFragment;
+        let start = rn.querySelector(connect!);
+        if(connectAreaAttachment !== undefined){
+            start = (<any>LeaderLine).areaAnchor(start as SVGElement, toAreaAttachment);
+        }else if(connectPointAttachment){
+            start = (<any>LeaderLine).pointAnchor(start, toPointAttachment);
+        }
+        let end = rn.querySelector(to!);
+        if(toAreaAttachment !== undefined){
+            end = (<any>LeaderLine).areaAnchor(start, toAreaAttachment);
+        }else if(toPointAttachment){
+            end = (<any>LeaderLine).pointAnchor(start, toPointAttachment);
+        }
     
-};
+        self.line = new LeaderLine(start, end) as any as LeaderLineType;        
+    }
+    doConfig(self: this){
+        const {line} = self;
+        const options = {} as any;
+        for(const key of configs){
+            options[key] = self[key];
+        }
+        line!.setOptions(options);
+    }
+}
 
-const propDefMap: PropDefMap<DOMArrow> = {
-    connect: reqStrProp,
-    isC: nnBool,
-    line: nnObj,
-    connectAreaAttachment: parsedObjProp,
-    toAreaAttachment: parsedObjProp,
-    connectPointAttachment: parsedObjProp,
-    toPointAttachment: parsedObjProp,
-    to: reqStrProp,
-    color: strProp1,
-    size: numProp1,
-    path: strProp1,
-    startSocket: strProp1,
-    endSocket: strProp1,
-    startSocketGravity: parsedObjProp,
-    endSocketGravity: parsedObjProp,
-    startPlug: strProp1,
-    endPlug: strProp1,
-    startPlugColor: strProp1,
-    endPlugColor: strProp1,
-    startPlugSize: numProp1,
-    endPlugSize: numProp1,
-    outline: boolProp,
-    outlineColor: strProp1,
-    outlineSize: numProp1,
+export interface DOMArrowCore extends DOMArrowProps{}
 
-    startPlugOutline: boolProp,
-    endPlugOutline: boolProp,
+const ce = new CE<DOMArrowProps, DOMArrowActions>();
 
-    startPlugOutlineColor: strProp1,
-    endPlugOutlineColor: strProp1,
+const configs = ['color', 'dash', 'dropShadow', 'endLabel','endPlug', 'endPlugColor','endPlugOutline','endPlugOutlineColor','endPlugOutlineSize','endPlugSize',
+'endSocket', 'endSocketGravity', 'gradient', 'hide', 'middleLabel', 'outline', 'outlineColor', 'outlineSize', 'path', 'show', 'size','startLabel',
+'startPlug','startPlugColor','startPlugOutlineSize','startPlugSize','startSocket','startPlugOutline','startPlugOutlineColor','startSocketGravity'] as (keyof DOMArrowProps & string)[];
 
-    startPlugOutlineSize: numProp1,
-    endPlugOutlineSize: numProp1,
+ce.def({
+    config:{
+        tagName: 'dom-arrow',
+        propDefaults:{
+            isC: true,
+            show: true,
+            hide: false,
+            outline: false,
+            startPlugOutline: false,
+            endPlugOutline: false,
+            
+        },
+        actions:{
+            doConnect:{
+                ifAllOf:['isC', 'connect', 'to']
+            },
+            doConfig:{
+                ifAllOf: ['line'],
+                actIfKeyIn: configs,
+            }
+        }
+    },
+    superclass: DOMArrowCore
+});
 
-    startLabel: strProp1,
-    middleLabel: strProp1,
-    endLabel: strProp1,
-
-    dash: parsedObjProp,
-    gradient: parsedObjProp,
-    dropShadow: parsedObjProp,
-
-    show: boolProp,
-    hide: boolProp,
-};
-const slicedPropDefs = xc.getSlicedPropDefs(propDefMap);
-xc.letThereBeProps(DOMArrow, slicedPropDefs, 'onPropChange');
-xc.define(DOMArrow);
-
+declare global {
+    interface HTMLElementTagNameMap {
+        'dom-arrow': DOMArrowCore;
+    }
+}

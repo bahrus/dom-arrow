@@ -9,7 +9,7 @@
 		"watch": true
 	},
 	"files": [
-		"dom-arrow2.ts",
+		"dom-arrow.ts",
 	]
 
 }
