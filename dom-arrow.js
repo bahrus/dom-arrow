@@ -2,7 +2,7 @@ import { CE } from 'trans-render/lib/CE.js';
 import { LeaderLine } from './leader-line.js';
 export class DOMArrowCore extends HTMLElement {
     doConnect(self) {
-        const { connect, to, connectAreaAttachment, connectPointAttachment, toAreaAttachment, toPointAttachment } = self;
+        const { connect, to, connectAreaAttachment, connectPointAttachment, toAreaAttachment, toPointAttachment, loadDelay } = self;
         let rn = self.getRootNode();
         let start = rn.querySelector(connect);
         if (connectAreaAttachment !== undefined) {
@@ -18,7 +18,14 @@ export class DOMArrowCore extends HTMLElement {
         else if (toPointAttachment) {
             end = LeaderLine.pointAnchor(start, toPointAttachment);
         }
-        self.line = new LeaderLine(start, end);
+        if (loadDelay > -1) {
+            setTimeout(() => {
+                self.line = new LeaderLine(start, end);
+            }, loadDelay);
+        }
+        else {
+            self.line = new LeaderLine(start, end);
+        }
     }
     doConfig(self) {
         const { line } = self;
@@ -43,10 +50,11 @@ ce.def({
             outline: false,
             startPlugOutline: false,
             endPlugOutline: false,
+            loadDelay: -1,
         },
         actions: {
             doConnect: {
-                ifAllOf: ['isC', 'connect', 'to']
+                ifAllOf: ['isC', 'connect', 'to'],
             },
             doConfig: {
                 ifAllOf: ['line'],

@@ -11,7 +11,8 @@ export class DOMArrowCore extends HTMLElement implements DOMArrowActions{
             connectAreaAttachment, 
             connectPointAttachment, 
             toAreaAttachment, 
-            toPointAttachment
+            toPointAttachment,
+            loadDelay
         } = self;
         let rn = self.getRootNode() as DocumentFragment;
         let start = rn.querySelector(connect!);
@@ -26,8 +27,14 @@ export class DOMArrowCore extends HTMLElement implements DOMArrowActions{
         }else if(toPointAttachment){
             end = (<any>LeaderLine).pointAnchor(start, toPointAttachment);
         }
-    
-        self.line = new LeaderLine(start, end) as any as LeaderLineType;        
+        if(loadDelay! > -1){
+            setTimeout(() => {
+                self.line = new LeaderLine(start, end) as any as LeaderLineType;
+            }, loadDelay);
+        }else{
+            self.line = new LeaderLine(start, end) as any as LeaderLineType;
+        }
+                
     }
     doConfig(self: this){
         const {line} = self;
@@ -57,11 +64,11 @@ ce.def({
             outline: false,
             startPlugOutline: false,
             endPlugOutline: false,
-            
+            loadDelay: -1,
         },
         actions:{
             doConnect:{
-                ifAllOf:['isC', 'connect', 'to']
+                ifAllOf:['isC', 'connect', 'to'],
             },
             doConfig:{
                 ifAllOf: ['line'],

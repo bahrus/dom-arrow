@@ -7,6 +7,7 @@ export interface DOMArrowProps extends Options{
     toAreaAttachment?: AreaAttachmentOptions,
     connectPointAttachment?: PointAttachmentOptions,
     toPointAttachment?: PointAttachmentOptions,
+    loadDelay?: number,
     /**
      * @private
      */
