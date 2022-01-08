@@ -1,5 +1,7 @@
 import { CE } from 'trans-render/lib/CE.js';
 import { LeaderLine } from './leader-line.js';
+import { importJSON } from 'be-loaded/importJSON.js';
+let configs;
 /**
  * @tagName dom-arrow
  * @element dom-arrow
@@ -57,44 +59,12 @@ export class DOMArrowCore extends HTMLElement {
         line.setOptions(options);
     }
 }
-const ce = new CE();
-const configs = ['color', 'dash', 'dropShadow', 'endLabel', 'endPlug', 'endPlugColor', 'endPlugOutline', 'endPlugOutlineColor', 'endPlugOutlineSize', 'endPlugSize',
-    'endSocket', 'endSocketGravity', 'gradient', 'hide', 'middleLabel', 'outline', 'outlineColor', 'outlineSize', 'path', 'show', 'size', 'startLabel',
-    'startPlug', 'startPlugColor', 'startPlugOutlineSize', 'startPlugSize', 'startSocket', 'startPlugOutline', 'startPlugOutlineColor', 'startSocketGravity'];
-const stringProp = {
-    type: 'String'
-};
-ce.def({
-    config: {
-        tagName: 'dom-arrow',
-        propDefaults: {
-            isC: true,
-            show: true,
-            hide: false,
-            outline: false,
-            startPlugOutline: false,
-            endPlugOutline: false,
-            loadDelay: -1,
-        },
-        propInfo: {
-            connect: stringProp,
-            to: stringProp,
-            color: stringProp,
-            startSocketGravity: stringProp,
-            endSocketGravity: stringProp,
-            startPlugColor: stringProp,
-            endPlugColor: stringProp,
-        },
-        actions: {
-            doConnect: {
-                ifAllOf: ['isC', 'connect', 'to'],
-                ifKeyIn: ['connectAreaAttachment', 'connectPointAttachment', 'toAreaAttachment', 'toPointAttachment', 'loadDelay']
-            },
-            doConfig: {
-                ifAllOf: ['line'],
-                ifKeyIn: configs,
-            }
-        }
-    },
-    superclass: DOMArrowCore
-});
+async function register() {
+    const imp = await importJSON('dom-arrow/da-config.json');
+    const def = imp.default.da;
+    configs = imp.default.configs;
+    def.superclass = DOMArrowCore;
+    const ce = new CE();
+    ce.def(def);
+}
+register();

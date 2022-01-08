@@ -29,18 +29,25 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "node node_modules/xtal-test/serve.js",
     "package-check": "package-check",
-    "doc": "custom-elements-manifest analyze"
+    "doc": "custom-elements-manifest analyze",
+    "build": "copy da-config.js da-config.mjs && node da-config.mjs > da-config.json",
+    "watch": "npm-watch"
   },
   "dependencies": {
     "leader-line": "1.0.5",
     "xtal-element": "0.0.458",
-    "trans-render": "0.0.445"
+    "trans-render": "0.0.445",
+    "be-loaded": "0.0.28"
   },
   "devDependencies": {
     "xtal-test": "0.0.54",
     "leader-line-types": "1.0.5-2",
     "@skypack/package-check": "0.2.2",
+    "npm-watch": "0.11.0",
     "@custom-elements-manifest/analyzer": "0.5.7"
+  },
+  "watch": {
+    "build": "*-config.js"
   },
   "repository": {
     "type": "git",

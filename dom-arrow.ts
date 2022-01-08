@@ -2,6 +2,9 @@ import {CE, PropInfo} from 'trans-render/lib/CE.js';
 import {DOMArrowProps, DOMArrowActions} from './types.js';
 import { LeaderLine} from './leader-line.js';
 import { Options, LeaderLine as LeaderLineType } from './leader-line-types.js';
+import {importJSON} from 'be-loaded/importJSON.js'
+
+let configs: any;
 
 /**
  * @tagName dom-arrow
@@ -61,7 +64,7 @@ export class DOMArrowCore extends HTMLElement implements DOMArrowActions{
         const {line} = self;
         const options = {} as any;
         for(const key of configs){
-            options[key] = self[key];
+            options[key] = (<any>self)[key];
         }
         line!.setOptions(options);
     }
@@ -69,50 +72,18 @@ export class DOMArrowCore extends HTMLElement implements DOMArrowActions{
 
 export interface DOMArrowCore extends DOMArrowProps{}
 
-const ce = new CE<DOMArrowProps, DOMArrowActions>();
+async function register(){
+    const imp = await importJSON('dom-arrow/da-config.json');
+    const def = imp.default.da;
+    configs = imp.default.configs;
+    def.superclass = DOMArrowCore
+    const ce = new CE<DOMArrowProps, DOMArrowActions>();
+    ce.def(def);
+}
 
-const configs = ['color', 'dash', 'dropShadow', 'endLabel','endPlug', 'endPlugColor','endPlugOutline','endPlugOutlineColor','endPlugOutlineSize','endPlugSize',
-'endSocket', 'endSocketGravity', 'gradient', 'hide', 'middleLabel', 'outline', 'outlineColor', 'outlineSize', 'path', 'show', 'size','startLabel',
-'startPlug','startPlugColor','startPlugOutlineSize','startPlugSize','startSocket','startPlugOutline','startPlugOutlineColor','startSocketGravity'] as (keyof DOMArrowProps & string)[];
+register();
 
-const stringProp: PropInfo = {
-    type: 'String'
-};
-ce.def({
-    config:{
-        tagName: 'dom-arrow',
-        propDefaults:{
-            isC: true,
-            show: true,
-            hide: false,
-            outline: false,
-            startPlugOutline: false,
-            endPlugOutline: false,
-            loadDelay: -1,
-        },
-        propInfo:{
-            connect: stringProp,
-            to: stringProp,
-            color: stringProp,
-            startSocketGravity: stringProp,
-            endSocketGravity: stringProp,
-            startPlugColor: stringProp,
-            endPlugColor: stringProp,
-            
-        },
-        actions:{
-            doConnect:{
-                ifAllOf:['isC', 'connect', 'to'],
-                ifKeyIn:['connectAreaAttachment', 'connectPointAttachment', 'toAreaAttachment', 'toPointAttachment', 'loadDelay']
-            },
-            doConfig:{
-                ifAllOf: ['line'],
-                ifKeyIn: configs,
-            }
-        }
-    },
-    superclass: DOMArrowCore
-});
+
 
 declare global {
     interface HTMLElementTagNameMap {

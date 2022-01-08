@@ -10,6 +10,7 @@
 	},
 	"files": [
 		"dom-arrow.ts",
+		"da-config.ts"
 	]
 
 }
