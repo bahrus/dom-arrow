@@ -10,10 +10,7 @@
     "./leader-line.js": "./leader-line.js"
   },
   "files": [
-    "dom*.*",
-    "leader-line-types.d.ts",
-    "leader-line.js",
-    "types.d.ts"
+    "*.*"
   ],
   "keywords": [
     "web_components",
