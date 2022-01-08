@@ -34,7 +34,7 @@
     "leader-line": "1.0.5",
     "xtal-element": "0.0.458",
     "trans-render": "0.0.445",
-    "be-loaded": "0.0.29"
+    "be-loaded": "0.0.30"
   },
   "devDependencies": {
     "xtal-test": "0.0.54",
